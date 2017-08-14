@@ -30,8 +30,10 @@ swapfile=$(losetup -f) #free loop device
 
 # set NOCOW
 touch $swapname
-chmod 0600 /swap
-chattr +C $swapname
+#chmod 0600 /swap
+chmod 0600 $swapname
+# centos7   btrfs  下 chattr +C 操作失败
+#chattr +C $swapname 
 head -c $swapsize /dev/zero >> $swapname
 
 losetup $swapfile $swapname #mount file to loop
